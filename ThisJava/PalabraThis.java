@@ -1,6 +1,6 @@
 public class PalabraThis {
     public static void main(String[] args) {
-        Persona persona = new Persona("Jimena", "Navarro");
+        PersonaEnc persona = new PersonaEnc("Jimena", "Navarro");
         System.out.println(persona);
         System.out.println(persona.nombre);
         System.out.println(persona.apellidos);
@@ -24,7 +24,7 @@ class Persona {
 }
 
 class Imprimir {
-    public void imprimir(Persona persona ){
+    public void imprimir(PersonaEnc persona ){
         System.out.println("persina desde imprimir " + persona);
         System.out.println("imprimir el objeto actual (this)" + this);
     }
