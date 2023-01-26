@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ejercicio formulario</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="recursos/estilos.css" type="text/css"/>
+    </head>
+    <body>
+        <form action="/ManejoFormulariosHTML/Servlet" name="form" method="POST" onsubmit="return validarForma(this)">
+            <input type="hidden" name="oculto" value="valor oculto"/>
+            <table width="200" id="enfasis-columna">
+                <caption>Formulario registro datos</caption>
+                <tr>
+                    <td class="columna">
+                        Usuario: *
+                    </td>
+                    <td>
+                        <input type="text" class="default" name="usuario" value="Escribir usuario" onfocus="this.select()"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="columna">
+                        Password*
+                    </td>
+                    <td>
+                        <input type="password" class="default" name="password"  onfocus="this.select()"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="columna">
+                        Teclonologias de internet*
+                    </td>
+                    <td>
+                        Java <input type="checkbox" class="default" name="tecnologia"  value="java"/>
+                        &nbsp;&nbsp;&nbsp;
+                        .Net <input type="checkbox" class="default" name="tecnologia"  value="net"/>
+                        &nbsp;&nbsp;&nbsp;
+                        PhP <input type="checkbox" class="default" name="tecnologia"  value="php"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="columna">
+                        Genero*
+                    </td>
+                    <td>
+                        Hombre: <input type="radio" class="default" name="genero"  value="h"/>
+                        &nbsp;&nbsp;&nbsp;
+                        Mujer: <input type="radio" class="default" name="genero"  value="m"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="columna">
+                        Ocupacion*
+                    </td>
+                    <td>
+                        <select class="default" name="ocupacion">
+                            <option value="">Seleccionar</option>
+                            <option value="1">Profesor</option>
+                            <option value="2">Ingeniero</option>
+                            <option value="3">Jubilado</option>
+                            <option value="4">Otro</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="columna">
+                        Musica favorita: (*)
+                    </td>
+                    <td>
+                        <select class="default" name="musica" multiple>
+                            <option value="rock">Rock</option>
+                            <option value="pop">pop</option>
+                            <option value="salsa">salsa</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="columna">
+                        Comentarios:
+                    </td>
+                    <td>
+                        <textarea name="comentarios" cols="10" rows="2" class="deafult" onfocus="this.select()">
+                                Escribir un texto
+                        </textarea>
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <input type="reset" value="Limpiar" class="deafult"/>
+                    </td>
+                    <td>
+                        <input type="submit" value="Enviar" class="deafult"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <script src="recursos/funciones.js"></script>
+        <script>
+                            function validarForma(Forma) {
+                                const usuario = Forma.usuario;
+                                if (usuario.value == "" || usuario.value == "Escribir usuario") {
+                                    alert("debes proporcionar un nombre de usuario")
+                                    usuario.focus();
+                                    usuario.select();
+                                    return false
+                                }
+                                const password = Forma.password;
+                                if (password.value == "" || password.value.length <= 3) {
+                                    alert("debe proporcionar un password almenos de 3 caracteres")
+                                    password.focus()
+                                    password.select()
+                                    return false
+                                }
+                                const tecnologias = Array.from(Forma.tecnologia);
+                                console.log(tecnologias)
+                                let checkSeleccionado = false;
+
+                                tecnologias.map(c => {
+                                    if (c.checked) {
+                                        checkSeleccionado = true
+                                    }
+                                })
+
+                                if (!checkSeleccionado) {
+                                    alert("Debe selecionar una tecnologia")
+                                    return false
+                                }
+
+                                const genero = Array.from(Forma.genero)
+                                let radioSeleccionado = false
+
+                                genero.map(g => {
+                                    if (g.checked) {
+                                        radioSeleccionado = true
+                                    }
+                                })
+
+                                if (!radioSeleccionado) {
+                                    alert("Debe selecionar una genero")
+                                    return false
+                                }
+
+                                const ocupacion = Forma.ocupacion
+                                if (ocupacion.value == "") {
+                                    aler("debe seleccionar una ocupacion")
+                                    return false
+                                }
+
+                                alert("formulario valido enviando datos al servidor")
+                                return true
+                            }
+        </script>
+        <style>
+            body, .default{
+                line-height: 1.6em;
+                font-family: sans-serif;
+                font-size: 12px;
+                color: #669;
+            }
+            #enfasis-columna{
+                margin : 45px;
+                width: 480px;
+                text-align: left;
+                border-collapse: collapse;
+            }
+            #enfasis-columna>caption{
+                font-size: 20px;
+            }
+            #enfasis-columna>th{
+                font-size: 14px;
+                font-weight: normal;
+                padding: 12px 15px;
+                color: #039;
+            }
+            #enfasis-columna>td{
+                padding: 10px 15px;
+                color: #669;
+                border-top: 1px solid #e8edff;
+            }
+            .columna{
+                background: #d0dafd;
+                border-right: 10px solid transparent;
+                border-left: 10px solid transparent;
+            }
+            #enfasis-columna>tr:hover>td{
+                color: #339;
+                background: #eff2ff;
+            }
+        </style>
+    </body>
+</html>
