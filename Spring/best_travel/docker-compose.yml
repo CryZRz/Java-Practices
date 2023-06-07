@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  document-db:
+    image: mongo:4.4.21
+    restart: always
+    container_name: best_travel_users
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: cryz
+      MONGO_INITDB_ROOT_PASSWORD: cryz274679442
+      MONGO_INITDB_DATABASE: users
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
